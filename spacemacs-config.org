@@ -548,6 +548,7 @@ Spacemacs 出厂自带了很多常用的 layer, 但同时也支持你自定义. 
     all-the-icons
     doom-modeline
     org-analyzer
+    org-brain
     )
 )
 #+END_SRC
@@ -694,6 +695,27 @@ Spacemacs 出厂自带了很多常用的 layer, 但同时也支持你自定义. 
 (defun lijigang/init-org-analyzer ()
   (use-package org-analyzer))
 
+;; see https://github.com/Kungsgeten/org-brain#setup-and-requirements
+(defun lijigang/init-org-brain ()
+  (use-package org-brain
+    :ensure t
+    :init
+    (setq org-brain-path "~/Library/Mobile Documents/com~apple~CloudDocs/org/brain/")
+    ;; For Evil users
+    (with-eval-after-load 'evil
+      (evil-set-initial-state 'org-brain-visualize-mode 'emacs))
+    :config
+    (setq org-id-track-globally t)
+    (setq org-id-locations-file "~/library/Mobile Documents/com~apple~CloudDocs/org/.org-id-locations")
+    (push '("b" "Brain" plain (function org-brain-goto-end)
+            "* %i%?" :empty-lines 1)
+          org-capture-templates)
+    (setq org-brain-visualize-default-choices 'all)
+    (setq org-brain-title-max-length 12)
+    (setq org-brain-include-file-entries nil
+          org-brain-file-entries-use-title nil)
+  )
+)
 #+END_SRC
 
 把上面配置生成文件即可:
