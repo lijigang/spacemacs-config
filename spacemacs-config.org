@@ -453,6 +453,10 @@ dotspacemacs-whitespace-cleanup 'trailing
 (set-default-coding-systems 'utf-8)
 (setq default-buffer-file-coding-system 'utf-8)
 
+;; gpg related
+(setq epa-pinentry-mode 'loopback)
+
+
 (setq user-full-name "lijigang"
       user-mail-address "i@lijigang.com")
 
