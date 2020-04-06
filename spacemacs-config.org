@@ -454,6 +454,7 @@ dotspacemacs-whitespace-cleanup 'trailing
 (setq default-buffer-file-coding-system 'utf-8)
 
 ;; gpg related
+(setq epg-gpg-program "gpg2")
 (setq epa-pinentry-mode 'loopback)
 
 
