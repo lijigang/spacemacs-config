@@ -209,7 +209,6 @@ dotspacemacs-whitespace-cleanup 'trailing
         (python . t)
         (shell . t)
         (plantuml . t)))
-  )
 #+END_SRC
 
 #+name: spacemacs-user-config-org-appearance
@@ -534,7 +533,6 @@ dotspacemacs-whitespace-cleanup 'trailing
     <<spacemacs-user-config-org-reveal>>
     <<spacemacs-user-config-org-keyboard>>
   )
-
   <<spacemacs-user-config-display>>
   <<spacemacs-user-config-latex>>
   <<spacemacs-user-config-others>>
