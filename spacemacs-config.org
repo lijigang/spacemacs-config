@@ -4,7 +4,6 @@
 
 [[https://github.com/lujun9972/emacs-document/blob/master/org-mode/%25E6%2595%2599%25E4%25BD%25A0%25E7%2594%25A8Org-mode%25E7%25AE%25A1%25E7%2590%2586dotfiles.org][Darksun]] 在 [[https://github.com/lujun9972/emacs-document/blob/master/org-mode/%25E6%2595%2599%25E4%25BD%25A0%25E7%2594%25A8Org-mode%25E7%25AE%25A1%25E7%2590%2586dotfiles.org][这篇文章]] 里介绍了如何通过一个 org file 管理自己的各种配置文件. 思路简单来说, 就是通过 tangle 文件中的 org 代码块(执行 org-babel-tangle-file 命令)的代码块, 将配置代码插入到它们应该在的地方.
 
-
 [[https://github.com/syl20bnr/spacemacs][Spacemacs]] 就是 Emacs 的一套配置。它对 evil 的支持，它的文档完善程度，极大的减少了 Emacs 的使用门槛, 让你可以将更多精力花在如何使用 Emacs/Org mode 上面.
 
 首先确保你电脑上已经:
@@ -13,10 +12,20 @@
 
 然后就可以开始你的个性化定制了, 这里分为两种定制, 一种是 =小修= 你通过修改 Spacemacs 变量配置来定制, 另一种是 =大改= 你通过 Spacemacs 的 layer 机制, 定制自己的使用场景.
 
-* 小修
-首先配置 Spacemacs 的 layers, 在这函数里只需要修改变量值, 不要写其它配置代码.
+* 小修: 修改 init.el
+init.el 中一共有四个函数:
+1. dotspacemacs/layers
+   启动 Emacs 时被调用的函数, 在这里配置想要使用的 layer 和 package
+2. dotspacemacs/init
+   最早被调用的函数, 在这里不要添加任何自定义代码, 只修改变量值即可
+3. dotspacemacs/user-init
+   在 2 之后, 在 layer 之前被调用, 在这里配置 package 的变量
+4. dotspacemacs/user-config
+   在 layer 之后被调用, 绝大部分个人配置应该在这里, 除非有些变量明确要求在 package 加载之前配置.
 
-#+name: spacemacs-default-variables
+前三个函数只是微调一些参数, 按自己需求来简单搞下即可.
+
+#+name: spacemacs-layers
 #+BEGIN_SRC emacs-lisp
 ;; 出厂自带的基础 layer, 默认选择 spacemacs 就好.
 dotspacemacs-distribution 'spacemacs
@@ -64,8 +73,6 @@ dotspacemacs-excluded-packages '(org-projectile)
 ;; 只有在使用的 package(in dotspacemacs-configuration-layers or dotspacemacs-additional-packages) 才会安装, 其它的删除掉.
 dotspacemacs-install-packages 'used-only
 #+END_SRC
-
-然后配置 Spacemacs 初始化代码, 在这函数里也同样只需要修改变量值, 不要写其它配置代码.
 
 #+name: spacemacs-init
 #+BEGIN_SRC emacs-lisp
@@ -134,8 +141,6 @@ dotspacemacs-fullscreen-at-startup t
 dotspacemacs-whitespace-cleanup 'trailing
 #+END_SRC
 
-接着配置你自己个性化的初始化代码, 这函数里的配置是在 package 加载之前执行:
-
 #+name: spacemacs-user-init
 #+BEGIN_SRC emacs-lisp
 ;; 默认源太慢了, 建议使用子龙山人的国内镜像源
@@ -153,30 +158,27 @@ dotspacemacs-whitespace-cleanup 'trailing
 
 #+END_SRC
 
-最后来配置下你的大部分个人配置代码, 先来 org mode 相关的:
-
-#+name: spacemacs-user-config-org-mode
+#+name: spacemacs-user-config-org-base
 #+BEGIN_SRC emacs-lisp
-;;;;;;;;;;;;;;;;;;;;;;;
-;; org mode 相关配置 ;;
-;;;;;;;;;;;;;;;;;;;;;;;
-(with-eval-after-load 'org
   ;; 设置 todo keywords
   (setq org-todo-keywords
         '((sequence "TODO" "HACK" "|" "DONE")))
 
-  ;; 调试好久的颜色，效果超赞！todo keywords 增加背景色
-  (setf org-todo-keyword-faces '(("TODO" . (:foreground "white" :background "#95A5A6"   :weight bold))
-                                 ("HACK" . (:foreground "white" :background "#2E8B57"  :weight bold))
-                                 ("DONE" . (:foreground "white" :background "#3498DB" :weight bold))))
-
-  ;; 设置 bullet list
+  ;; 设置 bullet list, 让 headline 变漂亮
   (setq org-bullets-bullet-list '("☰" "☷" "☯" "☭"))
 
   ;; 打开 org-indent mode
   (setq org-startup-indented t)
 
   (setq org-remember-clock-out-on-exit t)
+
+  ;; 折叠时不再显示「...」, 换个你喜欢的符号
+  (setq org-ellipsis "▼")
+
+  ;; inline image 不用展示实际大小，可以自定义大小显示
+  (setq org-image-actual-width '(450))
+
+  (setq org-hierarchical-todo-statistics nil)
 
   (setq org-html-validation-link nil)
 
@@ -187,6 +189,39 @@ dotspacemacs-whitespace-cleanup 'trailing
         org-confirm-babel-evaluate nil
         org-support-shift-select 'always)
 
+  (setq org-default-notes-file "~/Library/Mobile Documents/com~apple~CloudDocs/org/gtd/gtd.org")
+
+  (setq org-refile-targets '("~/Library/Mobile Documents/com~apple~CloudDocs/org/gtd/gtd.org" :maxlevel . 3))
+
+#+END_SRC
+
+#+name: spacemacs-user-config-org-babel
+#+BEGIN_SRC emacs-lisp
+  ;; stop emacs asking for confirmation when eval source code
+  (setq org-confirm-babel-evaluate nil)
+
+  ;; active Org-babel languages
+  (org-babel-do-load-languages
+    'org-babel-load-languages
+      '(;; other Babel languages
+        (emacs-lisp . t)
+        (ditaa . t)
+        (python . t)
+        (shell . t)
+        (plantuml . t)))
+  )
+#+END_SRC
+
+#+name: spacemacs-user-config-org-appearance
+#+BEGIN_SRC emacs-lisp
+  ;; 调试好久的颜色，效果超赞！todo keywords 增加背景色
+  (setf org-todo-keyword-faces '(("TODO" . (:foreground "white" :background "#95A5A6"   :weight bold))
+                                 ("HACK" . (:foreground "white" :background "#2E8B57"  :weight bold))
+                                 ("DONE" . (:foreground "white" :background "#3498DB" :weight bold))))
+#+END_SRC
+
+#+name: spacemacs-user-config-org-archive
+#+BEGIN_SRC emacs-lisp
   ;; Org archive
   (setq org-archive-location "%s_archive::date-tree")
 
@@ -221,6 +256,12 @@ dotspacemacs-whitespace-cleanup 'trailing
       ad-do-it))
 
 
+  ;; 把 org_archive 文件设置为 org-mode
+  (add-to-list 'auto-mode-alist '("\\.org_archive\\'" . org-mode))
+#+END_SRC
+
+#+name: spacemacs-user-config-org-agenda
+#+BEGIN_SRC emacs-lisp
   ;; agenda 里面时间块彩色显示
   ;; From: https://emacs-china.org/t/org-agenda/8679/3
   (defun ljg/org-agenda-time-grid-spacing ()
@@ -248,9 +289,6 @@ dotspacemacs-whitespace-cleanup 'trailing
 
   (add-hook 'org-agenda-finalize-hook #'ljg/org-agenda-time-grid-spacing)
 
-  ;; 把 org_archive 文件设置为 org-mode
-  (add-to-list 'auto-mode-alist '("\\.org_archive\\'" . org-mode))
-
   (setq org-agenda-prefix-format '((agenda . "%t %s ")))
   (setq org-agenda-clockreport-parameter-plist
         '(:link t :maxlevel 6 :fileskip0 t :compact t :narrow 60 :score 0))
@@ -264,22 +302,27 @@ dotspacemacs-whitespace-cleanup 'trailing
   (setq org-agenda-include-diary nil)
   (setq org-agenda-files (list  "~/Library/Mobile Documents/com~apple~CloudDocs/org/gtd/gtd.org"
                                 "~/Library/Mobile Documents/com~apple~CloudDocs/org/gtd/gtd.org_archive"))
+#+END_SRC
 
-  (setq org-default-notes-file "~/Library/Mobile Documents/com~apple~CloudDocs/org/gtd/gtd.org")
-  (setq org-refile-targets '("~/Library/Mobile Documents/com~apple~CloudDocs/org/gtd/gtd.org" :maxlevel . 3))
+#+name: spacemacs-user-config-org-reveal
+#+BEGIN_SRC emacs-lisp
 
   ;; 使用 reveal.js 来生成 html 版本的 ppt
   ;; https://opensource.com/article/18/2/how-create-slides-emacs-org-mode-and-revealjs
 
   (require 'ox-reveal)
   (setq org-reveal-root (concat (expand-file-name "~/Library/Mobile Documents/com~apple~CloudDocs/org/reveal.js")))
+
   ;; 可选主题在 reveal.js 安装目录的 css/theme/
   ;; beige/black/white/blood/league/moon/night/serif/simple/sky/solarized
   (setq org-reveal-theme "simple")
   (setq org-reveal-control t)
   (setq org-reveal-center t)
   (setq org-reveal-progress t)
+#+END_SRC
 
+#+name: spacemacs-user-config-org-keyboard
+#+BEGIN_SRC emacs-lisp
   ;; 设置快捷键
 
   (evil-leader/set-key "op" 'org-pomodoro)
@@ -303,27 +346,6 @@ dotspacemacs-whitespace-cleanup 'trailing
   (evil-leader/set-key "ds" 'org-insert-structure-template)
 
   (global-set-key (kbd "C--") 'org-table-insert-hline)
-
-
-  ;; Agenda clock report parameters
-  (setq org-agenda-clockreport-parameter-plist
-      '(:link t :maxlevel 6 :fileskip0 t :compact t :narrow 60 :score 0))
-
-  (setq org-hierarchical-todo-statistics nil)
-
-  ;; stop emacs asking for confirmation when eval source code
-  (setq org-confirm-babel-evaluate nil)
-
-  ;; active Org-babel languages
-  (org-babel-do-load-languages
-    'org-babel-load-languages
-      '(;; other Babel languages
-        (emacs-lisp . t)
-        (ditaa . t)
-        (python . t)
-        (shell . t)
-        (plantuml . t)))
-  )
 #+END_SRC
 
 再来显示相关的:
@@ -336,18 +358,12 @@ dotspacemacs-whitespace-cleanup 'trailing
 ;; 在状态栏显示时间
 (display-time-mode 1)
 
-;; 折叠时不再显示「...」, 换个你喜欢的符号
-(setq org-ellipsis "▼")
-
-;; inline image 不用展示实际大小，可以自定义大小显示
-(setq org-image-actual-width '(450))
-
 (global-hl-line-mode -1)
 
 (global-visual-line-mode 1)
 
 ;; 换行宽度
-(setq-default fill-column 72)
+(setq-default fill-column 80)
 
 ;; 打开黄金比例模式, 当前使用的窗口所占比例为 0.618
 (golden-ratio-mode)
@@ -355,7 +371,6 @@ dotspacemacs-whitespace-cleanup 'trailing
 ;; 默认把新开的 Window 显示在右侧
 (setq split-height-threshold nil)
 (setq split-width-threshold 0)
-
 
 ;; Remove the markup characters, i.e., "/text/" becomes (italized) "text"
 (setq org-hide-emphasis-markers t)
@@ -495,7 +510,7 @@ dotspacemacs-whitespace-cleanup 'trailing
 #+BEGIN_SRC emacs-lisp :tangle ~/.spacemacs.d/init.el :exports none :noweb yes :mkdirp yes
 (defun dotspacemacs/layers ()
   (setq-default
-   <<spacemacs-default-variables>>
+   <<spacemacs-layers>>
 ))
 
 (defun dotspacemacs/init ()
@@ -510,13 +525,22 @@ dotspacemacs-whitespace-cleanup 'trailing
 
 
 (defun dotspacemacs/user-config ()
-  <<spacemacs-user-config-org-mode>>
+  (with-eval-after-load 'org
+    <<spacemacs-user-config-org-base>>
+    <<spacemacs-user-config-org-babel>>
+    <<spacemacs-user-config-org-appearance>>
+    <<spacemacs-user-config-org-archive>>
+    <<spacemacs-user-config-org-agenda>>
+    <<spacemacs-user-config-org-reveal>>
+    <<spacemacs-user-config-org-keyboard>>
+  )
+
   <<spacemacs-user-config-display>>
   <<spacemacs-user-config-latex>>
   <<spacemacs-user-config-others>>
 )
 #+END_SRC
-* 大改
+* 大改: 定义 private layer
 除了配置一个个 package 这个笨办法以外, Spacemacs 引入了 layer 的概念, 即将一个场景(比如使用 org-mode 或者 python)常用的一些 package 给打包放一起, 统称为一个 layer.
 
 Spacemacs 出厂自带了很多常用的 layer, 但同时也支持你自定义. 我会把日常使用到的一些 package 放到自己的 layer 中.
