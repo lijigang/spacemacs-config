@@ -7,19 +7,9 @@
 
 [[https://github.com/syl20bnr/spacemacs][Spacemacs]] 就是 Emacs 的一套配置。它对 evil 的支持，它的文档完善程度，极大的减少了 Emacs 的使用门槛, 让你可以将更多精力花在如何使用 Emacs/Org mode 上面.
 
-首先确保你电脑上已经安装了 Emacs, 然后可以通过下面的命令将 Spacemacs 默认配置下载到本地.
-
-#+BEGIN_SRC shell
-
-第一次安装时把下面两行取消注释执行即可
-# mv ~/.emacs.d ~/.emacs.d.bak
-# git clone https://github.com/syl20bnr/spacemacs ~/.emacs.d
-
-# Spacemacs 有两种配置方法, 一种是通过 =~/.spacemacs= 文件, 将所有配置都在其
-# 中. 另一种是可以通过 =.spacemaacs.d= 目录中的 =~/init.el= 来配置. 我个人采用
-# 的是第二种(需确保先删除 ~/.spacemacs 文件).
-rm ~/.spacemacs
-#+END_SRC
+首先确保你电脑上已经:
+1. 安装了 Emacs
+2. 将 Spacemacs 默认配置下载到本地
 
 然后就可以开始你的个性化定制了, 这里分为两种定制, 一种是 =小修= 你通过修改 Spacemacs 变量配置来定制, 另一种是 =大改= 你通过 Spacemacs 的 layer 机制, 定制自己的使用场景.
 

@@ -1,0 +1,32 @@
+* 下载 =spacemacs=
+#+BEGIN_SRC shell
+
+mv ~/.emacs.d ~/.emacs.d.bak
+git clone https://github.com/syl20bnr/spacemacs ~/.emacs.d
+
+#+END_SRC
+* 指定配置文件
+
+Spacemacs 有两种配置方法, 一种是通过 =~/.spacemacs= 文件, 将所有配置都在其
+中. 另一种是可以通过 =~/.spacemaacs.d/init.el= 来配置.
+
+因为不管使用哪个配置方式, 都需要指定单独的文件夹来存放 private layer 内容,
+我个人采用的是第二种, 这样可以将默认配置和 private layer 配置放在同一个目
+录里.
+
+使用第二种配置, 需要先确保 =~/.spacemacs= 文件不存在 (要不然默认是先加载这个文件)
+
+#+begin_src shell
+rm ~/.spacemacs
+#+end_src
+
+* 使用自定义的配置
+
+#+begin_src shell
+git clone https//github.com/lijigang/spacemacs-config ~/spacemacs-config
+cd ~/spacemacs-config
+emacs spacemaacs-config.org
+M-x  org-babel-tangle-file
+#+end_src
+
+Done, 重启 Emacs 即可
