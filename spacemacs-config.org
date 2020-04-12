@@ -134,12 +134,15 @@ dotspacemacs-major-mode-leader-key ","
 ;; 设置大文件的定义标准(MB), 如果超过标准, 不激活 major/minor mode, 提升效能
 dotspacemacs-large-file-size 5
 
-;; 默认开启时全屏
-dotspacemacs-fullscreen-at-startup t
+;; 配置开启时是否全屏
+dotspacemacs-fullscreen-at-startup nil
 
 ;; 保存文件时删除每行尾部空白符(space/tab)
 dotspacemacs-whitespace-cleanup 'trailing
 #+END_SRC
+
+#+RESULTS: spacemacs-init
+: trailing
 
 #+name: spacemacs-user-init
 #+BEGIN_SRC emacs-lisp
@@ -261,46 +264,99 @@ dotspacemacs-whitespace-cleanup 'trailing
 
 #+name: spacemacs-user-config-org-agenda
 #+BEGIN_SRC emacs-lisp
-  ;; agenda 里面时间块彩色显示
-  ;; From: https://emacs-china.org/t/org-agenda/8679/3
-  (defun ljg/org-agenda-time-grid-spacing ()
-    "Set different line spacing w.r.t. time duration."
-    (save-excursion
-      (let* ((background (alist-get 'background-mode (frame-parameters)))
-             (background-dark-p (string= background "dark"))
-             (colors (list "#1ABC9C" "#2ECC71" "#3498DB" "#9966ff"))
-             pos
-             duration)
-        (nconc colors colors)
-        (goto-char (point-min))
-        (while (setq pos (next-single-property-change (point) 'duration))
-          (goto-char pos)
-          (when (and (not (equal pos (point-at-eol)))
-                     (setq duration (org-get-at-bol 'duration)))
-            (let ((line-height (if (< duration 30) 1.0 (+ 0.5 (/ duration 60))))
-                  (ov (make-overlay (point-at-bol) (1+ (point-at-eol)))))
-              (overlay-put ov 'face `(:background ,(car colors)
-                                                  :foreground
-                                                  ,(if background-dark-p "black" "white")))
-              (setq colors (cdr colors))
-              (overlay-put ov 'line-height line-height)
-              (overlay-put ov 'line-spacing (1- line-height))))))))
+;; agenda 里面时间块彩色显示
+;; From: https://emacs-china.org/t/org-agenda/8679/3
+(defun ljg/org-agenda-time-grid-spacing ()
+  "Set different line spacing w.r.t. time duration."
+  (save-excursion
+    (let* ((background (alist-get 'background-mode (frame-parameters)))
+           (background-dark-p (string= background "dark"))
+           (colors (list "#1ABC9C" "#2ECC71" "#3498DB" "#9966ff"))
+           pos
+           duration)
+      (nconc colors colors)
+      (goto-char (point-min))
+      (while (setq pos (next-single-property-change (point) 'duration))
+        (goto-char pos)
+        (when (and (not (equal pos (point-at-eol)))
+                   (setq duration (org-get-at-bol 'duration)))
+          (let ((line-height (if (< duration 30) 1.0 (+ 0.5 (/ duration 60))))
+                (ov (make-overlay (point-at-bol) (1+ (point-at-eol)))))
+            (overlay-put ov 'face `(:background ,(car colors)
+                                                :foreground
+                                                ,(if background-dark-p "black" "white")))
+            (setq colors (cdr colors))
+            (overlay-put ov 'line-height line-height)
+            (overlay-put ov 'line-spacing (1- line-height))))))))
 
-  (add-hook 'org-agenda-finalize-hook #'ljg/org-agenda-time-grid-spacing)
+(add-hook 'org-agenda-finalize-hook #'ljg/org-agenda-time-grid-spacing)
 
-  (setq org-agenda-prefix-format '((agenda . "%t %s ")))
-  (setq org-agenda-clockreport-parameter-plist
-        '(:link t :maxlevel 6 :fileskip0 t :compact t :narrow 60 :score 0))
+(setq org-agenda-prefix-format '((agenda . "%t %s ")))
+(setq org-agenda-clockreport-parameter-plist
+      '(:link t :maxlevel 6 :fileskip0 t :compact t :narrow 60 :score 0))
 
-  (setq org-agenda-start-on-weekday nil)
-  (setq org-agenda-log-mode-items '(clock))
-  (setq org-agenda-include-all-todo t)
-  (setq org-agenda-time-leading-zero t)
-  (setq org-agenda-use-time-grid nil)
+(setq org-agenda-start-on-weekday nil)
+(setq org-agenda-log-mode-items '(clock))
+(setq org-agenda-include-all-todo t)
+(setq org-agenda-time-leading-zero t)
+(setq org-agenda-use-time-grid nil)
 
-  (setq org-agenda-include-diary nil)
-  (setq org-agenda-files (list  "~/Library/Mobile Documents/com~apple~CloudDocs/org/gtd/gtd.org"
-                                "~/Library/Mobile Documents/com~apple~CloudDocs/org/gtd/gtd.org_archive"))
+(setq org-directory "~/Library/Mobile Documents/com~apple~CloudDocs/org/")
+(setq org-agenda-include-diary t)
+
+;; content of diary-file
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; ;;Day info             ;;
+;; ;; 日出而作, 日落而息  ;;
+;; %%(diary-sunrise)      ;;
+;; %%(diary-sunset)       ;;
+;; %%(diary-lunar-phases) ;;
+;; ;;                     ;;
+;; %%(diary-iso-date)     ;;
+;; ;;中国农历             ;;
+;; %%(diary-chinese-date) ;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(setq diary-file "~/Library/Mobile Documents/com~apple~CloudDocs/org/standard-diary")
+
+(setq org-agenda-diary-file "~/Library/Mobile Documents/com~apple~CloudDocs/org/standard-diary")
+
+(setq org-agenda-files '("~/Library/Mobile Documents/com~apple~CloudDocs/org/gtd/gtd.org"))
+
+;; learn from https://github.com/AbstProcDo/Master-Emacs-From-Scrach-with-Solid-Procedures/blob/master/05.Emacs-as-a-Agenda-by-Org.org
+
+;; 设置北京经纬度坐标
+(setq calendar-latitude 39.9042)
+(setq calendar-longitude 116.4074)
+
+;;Sunrise and Sunset
+;;日出而作, 日落而息
+(defun diary-sunrise ()
+  (let ((dss (diary-sunrise-sunset)))
+    (with-temp-buffer
+      (insert dss)
+      (goto-char (point-min))
+      (while (re-search-forward " ([^)]*)" nil t)
+        (replace-match "" nil nil))
+      (goto-char (point-min))
+      (search-forward ",")
+      (buffer-substring (point-min) (match-beginning 0)))))
+
+(defun diary-sunset ()
+  (let ((dss (diary-sunrise-sunset))
+        start end)
+    (with-temp-buffer
+      (insert dss)
+      (goto-char (point-min))
+      (while (re-search-forward " ([^)]*)" nil t)
+        (replace-match "" nil nil))
+      (goto-char (point-min))
+      (search-forward ", ")
+      (setq start (match-end 0))
+      (search-forward " at")
+      (setq end (match-beginning 0))
+      (goto-char start)
+      (capitalize-word 1)
+      (buffer-substring start end))))
 #+END_SRC
 
 #+name: spacemacs-user-config-org-reveal
@@ -719,9 +775,9 @@ Spacemacs 出厂自带了很多常用的 layer, 但同时也支持你自定义. 
     :config
     (setq org-id-track-globally t)
     (setq org-id-locations-file "~/library/Mobile Documents/com~apple~CloudDocs/org/.org-id-locations")
-    (push '("b" "Brain" plain (function org-brain-goto-end)
-            "* %i%?" :empty-lines 1)
-          org-capture-templates)
+    ;; (push '("b" "Brain" plain (function org-brain-goto-end)
+    ;;         "* %i%?" :empty-lines 1)
+    ;;       org-capture-templates)
     (setq org-brain-visualize-default-choices 'all)
     (setq org-brain-title-max-length 12)
     (setq org-brain-include-file-entries nil
