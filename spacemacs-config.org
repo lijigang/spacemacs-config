@@ -557,6 +557,10 @@ dotspacemacs-whitespace-cleanup 'trailing
 
 (setq dired-use-ls-dired nil)
 
+;; from: https://github.com/Fuco1/org-clock-budget
+;; load el file that not in melpa
+(load-file "~/Library/Mobile Documents/com~apple~CloudDocs/org/ljg-packages/org-clock-budget.el")
+
 ;; bug fix
 ;; https://github.com/seagle0128/.emacs.d/issues/129
 (org-reload)
