@@ -614,6 +614,7 @@ Spacemacs 出厂自带了很多常用的 layer, 但同时也支持你自定义. 
     all-the-icons
     doom-modeline
     org-analyzer
+    org-roam
     )
 )
 #+END_SRC
@@ -761,6 +762,29 @@ Spacemacs 出厂自带了很多常用的 layer, 但同时也支持你自定义. 
   (use-package org-analyzer))
 
 
+(defun lijigang/init-org-roam ()
+  (use-package org-roam
+    :hook
+    (after-init . org-roam-mode)
+    :custom
+    (org-roam-directory "~/Library/Mobile Documents/com~apple~CloudDocs/org/roam/")
+    :init
+    (progn
+      (spacemacs/declare-prefix "ar" "org-roam")
+      (spacemacs/set-leader-keys
+        "arl" 'org-roam
+        "art" 'org-roam-today
+        "arf" 'org-roam-find-file
+        "arg" 'org-roam-graph-show)
+
+      (spacemacs/declare-prefix-for-mode 'org-mode "mr" "org-roam")
+      (spacemacs/set-leader-keys-for-major-mode 'org-mode
+        "rl" 'org-roam
+        "rt" 'org-roam-today
+        "rb" 'org-roam-switch-to-buffer
+        "rf" 'org-roam-find-file
+        "ri" 'org-roam-insert
+        "rg" 'org-roam-graph-show))))
 #+END_SRC
 
 把上面配置生成文件即可:
