@@ -556,6 +556,10 @@ dotspacemacs-whitespace-cleanup 'trailing
 (setq yas-snippet-dirs (list "~/.spacemacs.d/snippets/"))
 
 (setq dired-use-ls-dired nil)
+
+;; bug fix
+;; https://github.com/seagle0128/.emacs.d/issues/129
+(org-reload)
 #+END_SRC
 
 全部梳理完毕, 现在可以生成配置文件 init.el 了:
