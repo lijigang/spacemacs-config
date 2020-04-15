@@ -392,7 +392,9 @@ dotspacemacs-whitespace-cleanup 'trailing
   (evil-leader/set-key "oif" 'org-footnote-action)
 
   (evil-leader/set-key "ood" (lambda () (interactive) (find-file "~/spacemacs-config/spacemacs-config.org")))
-  (evil-leader/set-key "oog" (lambda () (interactive) (find-file "~/Library/Mobile Documents/com~apple~CloudDocs/org/gtd/gtd.org")))
+
+  (evil-leader/set-key "oog" (lambda () (interactive) (find-file "~/Library/Mobile Documents/com~apple~CloudDocs/org/roam/20200415105428-task_pool.org")))
+
   (evil-leader/set-key "ool" (lambda () (interactive) (find-file "~/.spacemacs.d/layers/lijigang/packages.el")))
 
   ;; 插入 easy template
