@@ -161,38 +161,38 @@ dotspacemacs-whitespace-cleanup 'trailing
 
 #+name: spacemacs-user-config-org-base
 #+BEGIN_SRC emacs-lisp
-  ;; 设置 todo keywords
-  (setq org-todo-keywords
-        '((sequence "TODO" "HACK" "|" "DONE")))
+;; 设置 todo keywords
+(setq org-todo-keywords
+      '((sequence "TODO" "HACK" "|" "DONE")))
 
-  ;; 设置 bullet list, 让 headline 变漂亮
-  (setq org-bullets-bullet-list '("☰" "☷" "☯" "☭"))
+;; 设置 bullet list, 让 headline 变漂亮
+(setq org-bullets-bullet-list '("☰" "☷" "☯" "☭"))
 
-  ;; 打开 org-indent mode
-  (setq org-startup-indented t)
+;; 打开 org-indent mode
+(setq org-startup-indented t)
 
-  (setq org-remember-clock-out-on-exit t)
+(setq org-remember-clock-out-on-exit t)
 
-  ;; 折叠时不再显示「...」, 换个你喜欢的符号
-  (setq org-ellipsis "▼")
+;; 折叠时不再显示「...」, 换个你喜欢的符号
+(setq org-ellipsis "▼")
 
-  ;; inline image 不用展示实际大小，可以自定义大小显示
-  (setq org-image-actual-width '(450))
+;; inline image 不用展示实际大小，可以自定义大小显示
+(setq org-image-actual-width '(450))
 
-  (setq org-hierarchical-todo-statistics nil)
+(setq org-hierarchical-todo-statistics nil)
 
-  (setq org-html-validation-link nil)
+(setq org-html-validation-link nil)
 
-  ;; Let's have pretty source code blocks
-  (setq org-edit-src-content-indentation 0
-        org-src-tab-acts-natively t
-        org-src-fontify-natively t
-        org-confirm-babel-evaluate nil
-        org-support-shift-select 'always)
+;; Let's have pretty source code blocks
+(setq org-edit-src-content-indentation 0
+      org-src-tab-acts-natively t
+      org-src-fontify-natively t
+      org-confirm-babel-evaluate nil
+      org-support-shift-select 'always)
 
-  (setq org-default-notes-file "~/Library/Mobile Documents/com~apple~CloudDocs/org/gtd/gtd.org")
+(setq org-default-notes-file "~/Library/Mobile Documents/com~apple~CloudDocs/org/roam/20200415105428-task_pool.org")
 
-  (setq org-refile-targets '("~/Library/Mobile Documents/com~apple~CloudDocs/org/gtd/gtd.org" :maxlevel . 3))
+(setq org-refile-targets '("~/Library/Mobile Documents/com~apple~CloudDocs/org/gtd/gtd.org" :maxlevel . 3))
 
 #+END_SRC
 
@@ -219,6 +219,16 @@ dotspacemacs-whitespace-cleanup 'trailing
                                  ("HACK" . (:foreground "white" :background "#2E8B57"  :weight bold))
                                  ("DONE" . (:foreground "white" :background "#3498DB" :weight bold))))
 #+END_SRC
+
+#+name: spacemacs-user-config-org-capture
+#+begin_src emacs-lisp
+(setq org-capture-templates
+      '(("p" "Personal" entry (file+headline org-default-notes-file  "Personal")
+          "** TODO %?\n  %U\n  %i\n  %a\n")
+        ("w" "Work" entry (file+headline org-default-notes-file "Work")
+          "** TODO %?\n  %U\n  %i\n  %a\n")
+          ))
+#+end_src
 
 #+name: spacemacs-user-config-org-archive
 #+BEGIN_SRC emacs-lisp
@@ -592,6 +602,7 @@ dotspacemacs-whitespace-cleanup 'trailing
     <<spacemacs-user-config-org-base>>
     <<spacemacs-user-config-org-babel>>
     <<spacemacs-user-config-org-appearance>>
+    <<spacemacs-user-config-org-capture>>
     <<spacemacs-user-config-org-archive>>
     <<spacemacs-user-config-org-agenda>>
     <<spacemacs-user-config-org-reveal>>
