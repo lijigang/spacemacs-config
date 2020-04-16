@@ -310,6 +310,9 @@ dotspacemacs-whitespace-cleanup 'trailing
 
 (add-hook 'org-agenda-finalize-hook #'ljg/org-agenda-time-grid-spacing)
 
+;; agenda 中不显示指定 tags
+(setq org-agenda-hide-tags-regexp "重要不紧急\\|重要且紧急\\|不重要不紧急\\|不重要但紧急")
+
 (setq org-agenda-prefix-format '((agenda . "%t %s ")))
 (setq org-agenda-clockreport-parameter-plist
       '(:link t :maxlevel 6 :fileskip0 t :compact t :narrow 60 :score 0))
