@@ -224,22 +224,28 @@ dotspacemacs-whitespace-cleanup 'trailing
 #+name: spacemacs-user-config-org-capture
 #+begin_src emacs-lisp
 (setq org-capture-templates
-      '(("p"  ;;快捷键
-         "Personal" ;; 描述快键键对应的功能
-         entry ;; 填充类型为 heading
-         (file+headline org-default-notes-file  "Personal") ;;填充到哪个文件的哪个 heading 下面
-          "** TODO %?\n  %U\n  %i\n  %a\n")
-        ;; %?: 填完后光标所在位置
-        ;; %U: 非活跃的时间戳
-        ;; %i: 初始内容. 如果有选中区域, 即为该区域内容
-        ;; %a: 注释. 通常为 org-store-link 创建的链接
+          '(("p"  ;;快捷键
+             "Personal" ;; 描述快键键对应的功能
+             entry ;; 填充类型为 heading
+             (file+headline org-default-notes-file  "Personal") ;;填充到哪个文件的哪个 heading 下面
+              "** TODO %?\n  %i\n")
+            ;; %?: 填完后光标所在位置
+            ;; %U: 非活跃的时间戳
+            ;; %i: 初始内容. 如果有选中区域, 即为该区域内容
+            ;; %a: 注释. 通常为 org-store-link 创建的链接
 
-        ("w"
-         "Work"
-         entry
-         (file+headline org-default-notes-file "Work")
-          "** TODO %?\n  %U\n  %i\n  %a\n")
-          ))
+            ("m"
+             "Meeting"
+             entry
+             (file+headline "~/Library/Mobile Documents/com~apple~CloudDocs/org/roam/20200416194512-meetings.org" "Meetings")
+             "** TODO %?\n  %i\n")
+
+            ("w"
+             "Work"
+             entry
+             (file+headline org-default-notes-file "Work")
+             "** TODO %?\n  %i\n")
+              ))
 #+end_src
 
 #+name: spacemacs-user-config-org-archive
