@@ -41,25 +41,53 @@ dotspacemacs-configuration-layer-path '()
 ;; 需要加载的配置 layers
 dotspacemacs-configuration-layers
 '(
-  yaml
+  ;; Completion ;;
+  ;; Doc: https://develop.spacemacs.org/layers/+completion/auto-completion/README.html
+  (auto-completion :variables
+                   auto-completion-enable-sort-by-usage t
+                   auto-completion-tab-key-behavior 'cycle
+                   :disabled-for org markdown)
+
+  ;; Doc: https://develop.spacemacs.org/layers/+completion/helm/README.html
+  (helm :variables
+        hybrid-style-enable-hjkl-bindings t)
+
+  ;; Emacs ;;
+  ;; Doc: https://develop.spacemacs.org/layers/+emacs/better-defaults/README.html
+  better-defaults
+
+  ;; Doc: https://develop.spacemacs.org/layers/+emacs/smex/README.html
+  smex
+
+  ;; Doc: https://develop.spacemacs.org/layers/+readers/elfeed/README.html
+  (elfeed :variables
+          rmh-elfeed-org-files (list "~/Library/Mobile Documents/com~apple~CloudDocs/org/private/elfeed.org"))
+
+  ;; Programming ;;
+  emacs-lisp
+  git
+
+  ;; Doc: https://develop.spacemacs.org/layers/+os/osx/README.html
+  osx
+
   plantuml
   python
+  yaml
+
   html
-  helm
-  (auto-completion :variables auto-completion-enable-sort-by-usage t
-                    :disabled-for org markdown)
-  better-defaults
-  emacs-lisp
-  osx
-  git
+
+  ;; private layer ;;
   lijigang
+
+  ;; Orgmode ;;
+  ;; Doc: https://develop.spacemacs.org/layers/+emacs/org/README.html
   (org :variables
-        org-enable-reveal-js-support t
-        org-download-screenshot-method "screencapture"
-        org-download-image-dir "./images"
-        org-download-heading-lvl nil
-        org-download-timestamp "")
-)
+       org-enable-reveal-js-support t
+       org-download-screenshot-method "screencapture"
+       org-download-image-dir "./images"
+       org-download-heading-lvl nil
+       org-download-timestamp "")
+  )
 
 ;; 如果有些 package, 不想加到 layer 中, 但又想使用, 可以加到这里
 ;; 如果这些 package 还需要一些配置项, 可以把配置项放在 dotspace/user-config
@@ -552,6 +580,10 @@ dotspacemacs-whitespace-cleanup 'trailing
 (setq org-plantuml-jar-path
       (expand-file-name "~/Library/Mobile Documents/com~apple~CloudDocs/org/org-resources/plantuml.jar"))
 
+;; Doc: https://develop.spacemacs.org/layers/+filetree/neotree/README.html
+;; Use all-the-icons packages and fonts
+(setq neo-theme 'icons)
+
 (setq yas-snippet-dirs (list "~/.spacemacs.d/snippets/"))
 
 (setq dired-use-ls-dired nil)
@@ -623,6 +655,7 @@ Spacemacs 出厂自带了很多常用的 layer, 但同时也支持你自定义. 
     doom-modeline
     org-analyzer
     org-roam
+    helpful
     )
 )
 #+END_SRC
@@ -793,6 +826,14 @@ Spacemacs 出厂自带了很多常用的 layer, 但同时也支持你自定义. 
         "rf" 'org-roam-find-file
         "ri" 'org-roam-insert
         "rg" 'org-roam-graph-show))))
+
+
+(defun lijigang/init-helpful()
+  (use-package helpful
+    :config
+    (global-set-key (kbd "C-h f") #'helpful-callable)
+    (global-set-key (kbd "C-h v") #'helpful-variable)
+    (global-set-key (kbd "C-h k") #'helpful-key)))
 #+END_SRC
 
 把上面配置生成文件即可:
