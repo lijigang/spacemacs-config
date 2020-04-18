@@ -590,7 +590,12 @@ dotspacemacs-whitespace-cleanup 'trailing
 
 ;; from: https://github.com/Fuco1/org-clock-budget
 ;; load el file that not in melpa
-(load-file "~/Library/Mobile Documents/com~apple~CloudDocs/org/ljg-packages/org-clock-budget.el")
+(load-file "~/Library/Mobile Documents/com~apple~CloudDocs/org/private/org-clock-budget.el")
+
+
+;; from: https://github.com/manateelazycat/company-english-helper
+(add-to-list 'load-path "~/Library/Mobile Documents/com~apple~CloudDocs/org/private")
+(require 'company-english-helper)
 
 ;; bug fix
 ;; https://github.com/seagle0128/.emacs.d/issues/129
