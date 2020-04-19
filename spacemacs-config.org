@@ -224,6 +224,18 @@ dotspacemacs-whitespace-cleanup 'trailing
 
 (setq org-refile-targets '("~/Library/Mobile Documents/com~apple~CloudDocs/org/gtd/gtd.org" :maxlevel . 3))
 
+;; use new template
+(setq org-structure-template-alist '(("a" . "export ascii")
+                                     ("c" . "center")
+                                     ("C" . "comment")
+                                     ("e" . "example")
+                                     ("E" . "export")
+                                     ("h" . "export html")
+                                     ("l" . "export latex")
+                                     ("q" . "quote")
+                                     ("s" . "src")
+                                     ("v" . "verse")))
+
 #+END_SRC
 
 #+name: spacemacs-user-config-org-babel
