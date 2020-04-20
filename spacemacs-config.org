@@ -356,7 +356,14 @@ dotspacemacs-whitespace-cleanup 'trailing
 
 (setq org-agenda-diary-file "~/Library/Mobile Documents/com~apple~CloudDocs/org/standard-diary")
 
-(setq org-agenda-files '("~/Library/Mobile Documents/com~apple~CloudDocs/org/roam/"))
+(setq org-agenda-files '("~/Library/Mobile Documents/com~apple~CloudDocs/org/roam/20200415103847-2020_daily.org"
+                             "~/Library/Mobile Documents/com~apple~CloudDocs/org/roam/20200415105428-task_pool.org"
+
+                             "~/Library/Mobile Documents/com~apple~CloudDocs/org/roam/20200415160958-interview.org"
+
+                             "~/Library/Mobile Documents/com~apple~CloudDocs/org/roam/20200416194512-meetings.org"
+
+                             "~/Library/Mobile Documents/com~apple~CloudDocs/org/roam/20200417123552-archive_tasks.org"))
 
 ;; learn from https://github.com/AbstProcDo/Master-Emacs-From-Scrach-with-Solid-Procedures/blob/master/05.Emacs-as-a-Agenda-by-Org.org
 
