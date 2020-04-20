@@ -421,31 +421,33 @@ dotspacemacs-whitespace-cleanup 'trailing
 
 #+name: spacemacs-user-config-org-keyboard
 #+BEGIN_SRC emacs-lisp
-  ;; 设置快捷键
+;; 设置快捷键
 
-  (evil-leader/set-key "op" 'org-pomodoro)
-  (evil-leader/set-key "oc" 'org-capture)
-  (evil-leader/set-key "oa" 'org-agenda)
-  (evil-leader/set-key "ol" 'org-store-link)
-  (evil-leader/set-key "el" 'eval-print-last-sexp)
-  (evil-leader/set-key "od" 'org-archive-subtree)
+(evil-leader/set-key "op" 'org-pomodoro)
+(evil-leader/set-key "oc" 'org-capture)
+(evil-leader/set-key "oa" 'org-agenda)
+(evil-leader/set-key "ol" 'org-store-link)
+(evil-leader/set-key "el" 'eval-print-last-sexp)
+(evil-leader/set-key "od" 'org-archive-subtree)
 
-  (evil-leader/set-key "oip" 'org-set-property)
-  (evil-leader/set-key "oil" 'org-insert-link)
-  (evil-leader/set-key "ois" 'org-time-stamp)
-  (evil-leader/set-key "oid" 'org-insert-drawer)
-  (evil-leader/set-key "oif" 'org-footnote-action)
+(evil-leader/set-key "oip" 'org-set-property)
+(evil-leader/set-key "oil" 'org-insert-link)
+(evil-leader/set-key "ois" 'org-time-stamp)
+(evil-leader/set-key "oid" 'org-insert-drawer)
+(evil-leader/set-key "oif" 'org-footnote-action)
 
-  (evil-leader/set-key "ood" (lambda () (interactive) (find-file "~/spacemacs-config/spacemacs-config.org")))
+(evil-leader/set-key "ood" (lambda () (interactive) (find-file "~/spacemacs-config/spacemacs-config.org")))
 
-  (evil-leader/set-key "oog" (lambda () (interactive) (find-file "~/Library/Mobile Documents/com~apple~CloudDocs/org/roam/20200415105428-task_pool.org")))
+(evil-leader/set-key "oog" (lambda () (interactive) (find-file "~/Library/Mobile Documents/com~apple~CloudDocs/org/roam/20200415105428-task_pool.org")))
 
-  (evil-leader/set-key "ool" (lambda () (interactive) (find-file "~/.spacemacs.d/layers/lijigang/packages.el")))
+(evil-leader/set-key "ool" (lambda () (interactive) (find-file "~/.spacemacs.d/layers/lijigang/packages.el")))
 
-  ;; 插入 easy template
-  (evil-leader/set-key "ds" 'org-insert-structure-template)
+(evil-leader/set-key "oot" (lambda () (interactive) (find-file "~/Library/Mobile Documents/com~apple~CloudDocs/org/roam/20200415103847-2020_daily.org")))
 
-  (global-set-key (kbd "C--") 'org-table-insert-hline)
+;; 插入 easy template
+(evil-leader/set-key "ds" 'org-insert-structure-template)
+
+(global-set-key (kbd "C--") 'org-table-insert-hline)
 #+END_SRC
 
 再来显示相关的:
