@@ -209,6 +209,10 @@ dotspacemacs-whitespace-cleanup 'trailing
 ;; inline image 不用展示实际大小，可以自定义大小显示
 (setq org-image-actual-width '(450))
 
+;; 设置 clocktable 默认属性
+(setq org-clock-clocktable-default-properties
+      '(:scope agenda :compact t :block today))
+
 (setq org-hierarchical-todo-statistics nil)
 
 (setq org-html-validation-link nil)
