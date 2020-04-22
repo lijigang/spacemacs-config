@@ -176,10 +176,9 @@ dotspacemacs-whitespace-cleanup 'trailing
 #+BEGIN_SRC emacs-lisp
 ;; 默认源太慢了, 建议使用子龙山人的国内镜像源
 (setq configuration-layer--elpa-archives
-      '(("melpai-cn" . "http://elpa.zilongshanren.com/melpa/")
-        ("org-cn"   . "http://elpa.zilongshanren.com/org/")
-        ("gnu-cn" . "http://elpa.zilongshanren.com/gnu/")))
-
+      '(("melpa-cn" . "http://elpa.emacs-china.org/melpa/")
+        ("org-cn"   . "http://elpa.emacs-china.org/org/")
+        ("gnu-cn"   . "http://elpa.emacs-china.org/gnu/")))
 ;; 指定自己的 layer 路径
 (setq dotspacemacs-configuration-layer-path "~/.spacemacs.d/layers/")
 
