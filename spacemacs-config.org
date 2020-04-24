@@ -480,12 +480,11 @@ dotspacemacs-whitespace-cleanup 'trailing
 ;; Remove the markup characters, i.e., "/text/" becomes (italized) "text"
 (setq org-hide-emphasis-markers t)
 
-;; more useful frame title, that show either a file or a
-;; buffer name (if the buffer isn't visiting a file)
-(setq frame-title-format
-      '("" " 為學日益, 為道日損 - "
-        (:eval (if (buffer-file-name)
-                   (abbreviate-file-name (buffer-file-name)) "%b"))))
+;; 隐藏 title bar
+(setq default-frame-alist '((undecorated . t)))
+(add-to-list 'default-frame-alist '(drag-internal-border . 1))
+(add-to-list 'default-frame-alist '(internal-border-width . 5))
+
 #+END_SRC
 
 配置下 LaTeX 相关内容:
