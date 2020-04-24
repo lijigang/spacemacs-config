@@ -364,6 +364,8 @@ dotspacemacs-whitespace-cleanup 'trailing
 
                          "~/Library/Mobile Documents/com~apple~CloudDocs/org/roam/20200415160958-interview.org"
 
+                         "~/Library/Mobile Documents/com~apple~CloudDocs/org/roam/20200416194512-meetings.org"
+
                          "~/Library/Mobile Documents/com~apple~CloudDocs/org/roam/20200417123552-archive_tasks.org"))
 
 ;; learn from https://github.com/AbstProcDo/Master-Emacs-From-Scrach-with-Solid-Procedures/blob/master/05.Emacs-as-a-Agenda-by-Org.org
