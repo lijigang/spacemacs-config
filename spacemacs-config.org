@@ -355,7 +355,7 @@ dotspacemacs-whitespace-cleanup 'trailing
 ;; ;;中国农历             ;;
 ;; %%(diary-chinese-date) ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-(setq diary-file "~/Library/Mobile Documents/com~apple~CloudDocs/org/standard-diary")
+(setq diary-file "~/Library/Mobile Documents/com~apple~CloudDocs/org/private/standard-diary")
 
 (setq org-agenda-diary-file "~/Library/Mobile Documents/com~apple~CloudDocs/org/private/standard-diary")
 
