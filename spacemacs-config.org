@@ -696,7 +696,7 @@ Spacemacs 出厂自带了很多常用的 layer, 但同时也支持你自定义. 
   (use-package org-page
     :ensure t
     :config (progn
-          (setq op/site-main-title "常识")
+          (setq op/site-main-title "你对这个世界要有点意见")
           (setq op/personal-github-link "https://github.com/lijigang")
           (setq op/repository-directory "~/lijigang")
           (setq op/site-domain "http://lijigang.github.io/")
