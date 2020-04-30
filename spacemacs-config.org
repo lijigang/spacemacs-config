@@ -680,7 +680,7 @@ Spacemacs 出厂自带了很多常用的 layer, 但同时也支持你自定义. 
     wttrin
     beacon
     pangu-spacing
-    pyim
+    rime
     posframe
     org-kanban
     visual-fill-column
@@ -777,25 +777,16 @@ Spacemacs 出厂自带了很多常用的 layer, 但同时也支持你自定义. 
     (global-pangu-spacing-mode 1)
     (setq pangu-spacing-real-insert-separtor t)))
 
-(defun lijigang/init-pyim()
-  "Initialize pyim"
-  (use-package pyim
-    :ensure nil
-    :demand t
-    :init
-    (setq pyim-punctuation-translate-p '(no yes auto))
-    :config
-    (setq default-input-method "pyim")
-    (setq pyim-default-scheme 'wubi)
 
-    ;; 让 Emacs 启动时自动加载 pyim 词库
-    (add-hook 'emacs-startup-hook
-              #'(lambda () (pyim-restart-1 t)))
-
-    (setq pyim-page-tooltip 'posframe)
-    (setq pyim-dicts '((:name "基础词库" :file "~/Library/Mobile Documents/com~apple~CloudDocs/3-config/wbdict.pyim")))
-    (global-set-key (kbd "C-9") 'toggle-input-method)
-    ))
+(defun lijigang/init-rime ()
+    (use-package rime
+      :custom
+      (default-input-method "rime")
+      (rime-librime-root "~/.emacs.d/librime/dist")
+      :config
+      (setq rime-user-data-dir "~/Library/Rime")
+      (setq rime-show-candidate 'posframe)
+      (setq rime-posframe-style 'simple)))
 
 (defun lijigang/init-posframe ()
   (use-package posframe))
