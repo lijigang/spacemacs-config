@@ -591,7 +591,11 @@ dotspacemacs-whitespace-cleanup 'trailing
 
 (evil-leader/set-key "oit" 'insert-day-progress)
 
+
 (add-to-list 'org-src-lang-modes '("plantuml" . plantuml))
+
+(add-to-list 'org-babel-default-header-args:plantuml
+               '(:cmdline . "-charset utf-8"))
 
 ;; 时间戳使用英文星期
 (setq system-time-locale "C")
