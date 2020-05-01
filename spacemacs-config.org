@@ -132,6 +132,7 @@ dotspacemacs-scratch-mode 'emacs-lisp-mode
 
 ;; 在这里设置你想的主题配色, 启动时加载的是第一个主題
 dotspacemacs-themes '(
+                      monokai
                       fantom
                       doom-one
                       srcery
@@ -140,7 +141,6 @@ dotspacemacs-themes '(
                       tao-yang
                       material
                       solarized-light
-                      monokai
                       spacemacs-light
                       zenburn
                       dracula
@@ -206,7 +206,7 @@ dotspacemacs-whitespace-cleanup 'trailing
 (setq org-ellipsis "▼")
 
 ;; inline image 不用展示实际大小，可以自定义大小显示
-(setq org-image-actual-width '(450))
+(setq org-image-actual-width nil)
 
 ;; 设置 clocktable 默认属性
 (setq org-clock-clocktable-default-properties
