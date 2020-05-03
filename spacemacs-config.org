@@ -715,6 +715,7 @@ Spacemacs 出厂自带了很多常用的 layer, 但同时也支持你自定义. 
     helm-org-rifle
     wc-mode
     writeroom-mode
+    speed-type
     )
 )
 #+END_SRC
@@ -899,6 +900,8 @@ Spacemacs 出厂自带了很多常用的 layer, 但同时也支持你自定义. 
 (defun lijigang/init-writeroom-mode ()
   (use-package writeroom-mode))
 
+(defun lijigang/init-speed-type()
+  (use-package speed-type))
 #+END_SRC
 
 把上面配置生成文件即可:
