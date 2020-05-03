@@ -639,6 +639,9 @@ dotspacemacs-whitespace-cleanup 'trailing
 
 (setq dired-use-ls-dired nil)
 
+;; 打开 org 文件直接进入 writeroom-mode
+(add-hook 'org-mode-hook (lambda () (writeroom-mode 1)))
+
 ;; from: https://github.com/Fuco1/org-clock-budget
 ;; load el file that not in melpa
 (load-file "~/Library/Mobile Documents/com~apple~CloudDocs/org/private/org-clock-budget.el")
