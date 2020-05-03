@@ -132,12 +132,12 @@ dotspacemacs-scratch-mode 'emacs-lisp-mode
 
 ;; 在这里设置你想的主题配色, 启动时加载的是第一个主題
 dotspacemacs-themes '(
+                      tao-yin
                       monokai
                       fantom
                       doom-one
                       srcery
                       doom-peacock
-                      tao-yin
                       tao-yang
                       material
                       solarized-light
@@ -202,6 +202,15 @@ dotspacemacs-whitespace-cleanup 'trailing
 
 (setq org-remember-clock-out-on-exit t)
 
+;; When editing a code snippet, use the current window rather than popping open a new one (which shows the same information).
+(setq org-src-window-setup 'current-window)
+
+(setq org-html-head-include-default-style nil)
+(setq org-export-html-style-include-scripts nil)
+
+(setq org-html-head
+        "<link rel='stylesheet' type='text/css' href='https://gongzhitaao.org/orgcss/org.css'/>")
+
 ;; 折叠时不再显示「...」, 换个你喜欢的符号
 (setq org-ellipsis "▼")
 
@@ -240,6 +249,9 @@ dotspacemacs-whitespace-cleanup 'trailing
                                      ("v" . "verse")))
 
 #+END_SRC
+
+#+RESULTS: spacemacs-user-config-org-base
+: ((a . export ascii) (c . center) (C . comment) (e . example) (E . export) (h . export html) (l . export latex) (q . quote) (s . src) (v . verse))
 
 #+name: spacemacs-user-config-org-babel
 #+BEGIN_SRC emacs-lisp
@@ -481,10 +493,21 @@ dotspacemacs-whitespace-cleanup 'trailing
 (setq org-hide-emphasis-markers t)
 
 ;; 隐藏 title bar
-(setq default-frame-alist '((undecorated . t)))
-(add-to-list 'default-frame-alist '(drag-internal-border . 1))
-(add-to-list 'default-frame-alist '(internal-border-width . 5))
+;; (setq default-frame-alist '((undecorated . t)))
+;; (add-to-list 'default-frame-alist '(drag-internal-border . 1))
+;; (add-to-list 'default-frame-alist '(internal-border-width . 5))
 
+(setq frame-title-format '("你要对这个世界有点意见"))
+(set-frame-parameter (selected-frame) 'alpha '(92 90)) ;transparency
+(add-to-list 'default-frame-alist '(alpha 92 90)) ;transparency
+
+;; I find it easier to use Apple’s Command-i, Command-b, Command-u to set italics, bold, underline. In Org:
+(add-hook 'org-mode-hook
+          '(lambda ()
+              (define-key org-mode-map (kbd "s-i") (kbd "\C-c \C-x \C-f /"))
+              (define-key org-mode-map (kbd "s-b") (kbd "\C-c \C-x \C-f *"))
+              (define-key org-mode-map (kbd "s-u") (kbd "\C-c \C-x \C-f _"))
+              ))
 #+END_SRC
 
 配置下 LaTeX 相关内容:
@@ -690,6 +713,8 @@ Spacemacs 出厂自带了很多常用的 layer, 但同时也支持你自定义. 
     org-roam
     helpful
     helm-org-rifle
+    wc-mode
+    writeroom-mode
     )
 )
 #+END_SRC
@@ -863,6 +888,17 @@ Spacemacs 出厂自带了很多常用的 layer, 但同时也支持你自定义. 
 
 (defun lijigang/init-helm-org-rifle()
   (use-package helm-org-rifle))
+
+
+(defun lijigang/init-wc-mode()
+  (use-package wc-mode
+    :config
+    (add-hook 'org-mode-hook 'wc-mode)
+    (setq wc-modeline-format "WC[%W%w/%tw]")))
+
+(defun lijigang/init-writeroom-mode ()
+  (use-package writeroom-mode))
+
 #+END_SRC
 
 把上面配置生成文件即可:
