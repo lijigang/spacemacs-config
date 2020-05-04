@@ -719,6 +719,7 @@ Spacemacs 出厂自带了很多常用的 layer, 但同时也支持你自定义. 
     wc-mode
     writeroom-mode
     speed-type
+    org-sidebar
     )
 )
 #+END_SRC
@@ -905,6 +906,10 @@ Spacemacs 出厂自带了很多常用的 layer, 但同时也支持你自定义. 
 
 (defun lijigang/init-speed-type()
   (use-package speed-type))
+
+
+(defun lijigang/init-org-sidebar()
+  (use-package org-sidebar))
 #+END_SRC
 
 把上面配置生成文件即可:
