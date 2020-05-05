@@ -234,7 +234,7 @@ dotspacemacs-whitespace-cleanup 'trailing
 
 (setq org-default-notes-file "~/Library/Mobile Documents/com~apple~CloudDocs/org/roam/20200415105428-task_pool.org")
 
-(setq org-refile-targets '("~/Library/Mobile Documents/com~apple~CloudDocs/org/gtd/gtd.org" :maxlevel . 3))
+(setq org-refile-targets '((org-agenda-files :maxlevel . 3)))
 
 ;; use new template
 (setq org-structure-template-alist '(("a" . "export ascii")
