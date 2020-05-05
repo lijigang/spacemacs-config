@@ -205,6 +205,9 @@ dotspacemacs-whitespace-cleanup 'trailing
 ;; When editing a code snippet, use the current window rather than popping open a new one (which shows the same information).
 (setq org-src-window-setup 'current-window)
 
+ ;; Then inline latex like $y=mx+c$ will appear in a different colour in an org-mode file to help it stand out.
+(setq org-highlight-latex-and-related '(latex))
+
 (setq org-html-head-include-default-style nil)
 (setq org-export-html-style-include-scripts nil)
 
@@ -249,9 +252,6 @@ dotspacemacs-whitespace-cleanup 'trailing
                                      ("v" . "verse")))
 
 #+END_SRC
-
-#+RESULTS: spacemacs-user-config-org-base
-: ((a . export ascii) (c . center) (C . comment) (e . example) (E . export) (h . export html) (l . export latex) (q . quote) (s . src) (v . verse))
 
 #+name: spacemacs-user-config-org-babel
 #+BEGIN_SRC emacs-lisp
