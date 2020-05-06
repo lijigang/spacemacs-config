@@ -720,6 +720,7 @@ Spacemacs 出厂自带了很多常用的 layer, 但同时也支持你自定义. 
     writeroom-mode
     speed-type
     org-sidebar
+    dired-subtree
     )
 )
 #+END_SRC
@@ -910,6 +911,12 @@ Spacemacs 出厂自带了很多常用的 layer, 但同时也支持你自定义. 
 
 (defun lijigang/init-org-sidebar()
   (use-package org-sidebar))
+
+(defun lijigang/init-dired-subtree()
+    (use-package dired-subtree
+      :defer t
+      :bind (:map dired-mode-map
+                  ("TAB" . dired-subtree-cycle))))
 #+END_SRC
 
 把上面配置生成文件即可:
