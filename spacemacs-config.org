@@ -79,6 +79,26 @@ dotspacemacs-configuration-layers
   ;; private layer ;;
   lijigang
 
+
+  (mu4e :variables
+        mu4e-maildir "~/Maildir"
+        mu4e-attachment-dir "~/Documents/QQmail-attachment"
+        mu4e-get-mail-command "/usr/local/bin/mbsync -a"
+        mu4e-html2text-command "/usr/local/bin/w3m -T text/html"
+        mu4e-use-fancy-chars t
+        mu4e-drafts-folder "/QQmail/Drafts"
+        mu4e-sent-folder "/QQmail/Sent"
+        mu4e-trash-folder "/QQmail/Trash"
+        mu4e-refile-folder "/QQmail/All"
+        mu4e-alert-interesting-mail-query "flag:unread AND maildir:/INBOX"
+        mu4e-display-update-status-in-modeline t
+        mu4e-update-interval 300
+        mu4e-maildir-shortcuts
+        '( ("/INBOX"               . ?i)
+           ("/QQmail/Sent"   . ?s)
+           ("/QQmail/Trash"       . ?t)
+           ("/QQmail/All"    . ?a))
+        )
   ;; Orgmode ;;
   ;; Doc: https://develop.spacemacs.org/layers/+emacs/org/README.html
   (org :variables
@@ -590,6 +610,13 @@ dotspacemacs-whitespace-cleanup 'trailing
 (setq epa-pinentry-mode 'loopback)
 
 
+;; send mail using msmtp
+(setq sendmail-program "/usr/local/bin/msmtp"
+      send-mail-function 'smtpmail-send-it
+      message-sendmail-f-is-evil t
+      message-sendmail-extra-arguments '("--read-envelope-from")
+      message-send-mail-function 'message-send-mail-with-sendmail)
+
 (setq user-full-name "lijigang"
       user-mail-address "i@lijigang.com")
 
@@ -618,7 +645,7 @@ dotspacemacs-whitespace-cleanup 'trailing
 (add-to-list 'org-src-lang-modes '("plantuml" . plantuml))
 
 (add-to-list 'org-babel-default-header-args:plantuml
-               '(:cmdline . "-charset utf-8"))
+             '(:cmdline . "-charset utf-8"))
 
 ;; 时间戳使用英文星期
 (setq system-time-locale "C")
