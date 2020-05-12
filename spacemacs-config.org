@@ -152,6 +152,7 @@ dotspacemacs-scratch-mode 'emacs-lisp-mode
 
 ;; 在这里设置你想的主题配色, 启动时加载的是第一个主題
 dotspacemacs-themes '(
+                      default
                       tao-yin
                       monokai
                       fantom
