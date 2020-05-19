@@ -674,6 +674,8 @@ dotspacemacs-whitespace-cleanup 'trailing
 ;; load el file that not in melpa
 (load-file "~/Library/Mobile Documents/com~apple~CloudDocs/org/private/org-clock-budget.el")
 
+;; load elegant theme
+(load-file "~/Library/Mobile Documents/com~apple~CloudDocs/org/private/elegant.el")
 
 ;; from: https://github.com/manateelazycat/company-english-helper
 (add-to-list 'load-path "~/Library/Mobile Documents/com~apple~CloudDocs/org/private")
