@@ -900,18 +900,26 @@ Spacemacs 出厂自带了很多常用的 layer, 但同时也支持你自定义. 
       (spacemacs/declare-prefix "ar" "org-roam")
       (spacemacs/set-leader-keys
         "arl" 'org-roam
-        "art" 'org-roam-today
+        "arc" 'org-roam-capture
         "arf" 'org-roam-find-file
         "arg" 'org-roam-graph-show)
 
       (spacemacs/declare-prefix-for-mode 'org-mode "mr" "org-roam")
       (spacemacs/set-leader-keys-for-major-mode 'org-mode
         "rl" 'org-roam
-        "rt" 'org-roam-today
+        "rc" 'org-roam-capture
         "rb" 'org-roam-switch-to-buffer
         "rf" 'org-roam-find-file
         "ri" 'org-roam-insert
-        "rg" 'org-roam-graph-show))))
+        "rg" 'org-roam-graph-show))
+    :config
+    (add-to-list 'org-roam-capture-templates
+                 '("p" "Persona" plain (function org-roam-capture--get-point)
+                   "| ${title} 是怎样一个人? |A!|Q?|A!|\n|年龄?|%?|婚姻?||\n|上家公司?||爱好?||\n|口头禅?||老家?||\n|工作特点?||怎么批评下属?||\n"
+                   :file-name "${slug}"
+                   :head "#+TITLE: ${title}\n\n"
+                   :unnarrowed t
+                   ))))
 
 
 (defun lijigang/init-helpful()
