@@ -280,6 +280,12 @@ dotspacemacs-whitespace-cleanup 'trailing
 
 #+name: spacemacs-user-config-org-capture
 #+begin_src emacs-lisp
+
+;; Use full window for org-capture
+(add-hook 'org-capture-mode-hook 'delete-other-windows)
+(add-hook 'org-agenda-mode-hook 'delete-other-windows)
+
+
 (setq org-capture-templates
           '(("d"  ;;快捷键
              "Default Todo Tasks" ;; 描述快键键对应的功能
@@ -323,7 +329,8 @@ dotspacemacs-whitespace-cleanup 'trailing
 
   (add-hook 'org-agenda-finalize-hook #'ljg/org-agenda-time-grid-spacing)
 
-  (setq org-agenda-prefix-format '((agenda . "%t %s ")))
+  (setq org-agenda-prefix-format '((agenda . "%t %s ")
+                                   (todo   . " ")))
   (setq org-agenda-clockreport-parameter-plist
         '(:link t :maxlevel 6 :fileskip0 t :compact t :narrow 60 :score 0))
 
@@ -353,7 +360,7 @@ dotspacemacs-whitespace-cleanup 'trailing
   (setq org-agenda-diary-file "~/Library/Mobile Documents/com~apple~CloudDocs/org/private/standard-diary")
 
   (setq org-agenda-files '(
-                           "~/Library/Mobile Documents/com~apple~CloudDocs/org/org-roam/inbox.org"))
+                           "~/Library/Mobile Documents/com~apple~CloudDocs/org/org-roam/"))
 
   ;; learn from https://github.com/AbstProcDo/Master-Emacs-From-Scrach-with-Solid-Procedures/blob/master/05.Emacs-as-a-Agenda-by-Org.org
 
