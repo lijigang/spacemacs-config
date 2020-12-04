@@ -212,7 +212,10 @@ dotspacemacs-whitespace-cleanup 'trailing
 (setq org-export-html-style-include-scripts nil)
 
 (setq org-html-head
-        "<link rel='stylesheet' type='text/css' href='https://gongzhitaao.org/orgcss/org.css'/>")
+      "<link rel='stylesheet' type='text/css' href='https://www.labri.fr/perso/nrougier/GTD/GTD.css'/>")
+
+;; (setq org-html-head
+;;         "<link rel='stylesheet' type='text/css' href='https://gongzhitaao.org/orgcss/org.css'/>")
 
 ;; 折叠时不再显示「...」, 换个你喜欢的符号
 (setq org-ellipsis "▼")
