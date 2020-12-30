@@ -713,7 +713,7 @@ Spacemacs 出厂自带了很多常用的 layer, 但同时也支持你自定义. 
     org-sidebar
     dired-subtree
     ;; sis
-    valign
+    ;; valign
     )
 )
 #+END_SRC
@@ -931,12 +931,12 @@ Spacemacs 出厂自带了很多常用的 layer, 但同时也支持你自定义. 
                   ("TAB" . dired-subtree-cycle))))
 
 
-(defun lijigang/init-valign()
-  (use-package valign
-    :ensure t
-    :config
-    (setq valign-fancy-bar t)
-    (add-hook 'org-mode-hook #'valign-mode)))
+;; (defun lijigang/init-valign()
+;;   (use-package valign
+;;     :ensure t
+;;     :config
+;;     (setq valign-fancy-bar t)
+;;     (add-hook 'org-mode-hook #'valign-mode)))
 #+END_SRC
 
 把上面配置生成文件即可:
