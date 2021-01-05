@@ -631,7 +631,8 @@ dotspacemacs-whitespace-cleanup 'trailing
 ;; Use all-the-icons packages and fonts
 (setq neo-theme 'icons)
 
-(setq yas-snippet-dirs (list "~/.spacemacs.d/snippets/"))
+(setq yas-snippet-dirs (list "~/Library/Mobile Documents/com~apple~CloudDocs/org/snippets"))
+(yas-global-mode 1)
 
 (setq dired-use-ls-dired nil)
 
@@ -644,6 +645,9 @@ dotspacemacs-whitespace-cleanup 'trailing
 
 ;; load elegant theme
 (load-file "~/Library/Mobile Documents/com~apple~CloudDocs/org/private/elegant.el")
+
+(load-file "~/Library/Mobile Documents/com~apple~CloudDocs/org/private/number-separator/number-separator.el")
+(number-separator-mode)
 
 ;; bug fix
 ;; https://github.com/seagle0128/.emacs.d/issues/129
