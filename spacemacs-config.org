@@ -612,6 +612,7 @@ dotspacemacs-whitespace-cleanup 'trailing
 
 (evil-leader/set-key "oit" 'insert-day-progress)
 
+(add-to-list 'warning-suppress-types '(yasnippet backquote-change))
 
 (add-to-list 'org-src-lang-modes '("plantuml" . plantuml))
 
