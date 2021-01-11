@@ -644,11 +644,40 @@ dotspacemacs-whitespace-cleanup 'trailing
 ;; (load-file "~/Library/Mobile Documents/com~apple~CloudDocs/org/private/org-clock-budget.el")
 
 ;; load elegant theme
-(load-file "~/Library/Mobile Documents/com~apple~CloudDocs/org/private/elegant.el")
+;; (load-file "~/Library/Mobile Documents/com~apple~CloudDocs/org/private/elegant.el")
 
 (load-file "~/Library/Mobile Documents/com~apple~CloudDocs/org/private/number-separator/number-separator.el")
 (number-separator-mode)
 
+
+  (load-file "~/Library/Mobile Documents/com~apple~CloudDocs/org/private/org-outer-indent/org-outer-indent.el")
+
+  (add-hook 'org-mode-hook
+            (lambda () (org-outer-indent-mode 1)))
+  (add-hook 'org-mode-hook
+            (lambda () (org-num-mode 1)))
+
+  ;; load elegant theme
+  ;; (load-file "~/Library/Mobile Documents/com~apple~CloudDocs/org/private/elegant.el")
+
+  (add-to-list 'load-path "~/Library/Mobile Documents/com~apple~CloudDocs/org/private/nano-emacs/")
+
+  (require 'nano-faces)
+  (require 'nano-base-colors)
+  (require 'nano-theme)
+  (require 'nano-writer)
+  (require 'nano-theme-light)
+  (require 'nano-help)
+  (require 'nano-splash)
+  (require 'nano-modeline)
+  (require 'nano-layout)
+  (require 'nano-defaults)
+  (require 'nano-session)
+  (require 'nano-colors)
+  (require 'nano-counsel)
+  (nano-faces)
+  (nano-theme)
+  (nano-defaults)
 ;; bug fix
 ;; https://github.com/seagle0128/.emacs.d/issues/129
 (org-reload)
